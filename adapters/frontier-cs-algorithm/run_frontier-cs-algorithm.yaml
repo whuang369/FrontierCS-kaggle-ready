@@ -1,0 +1,28 @@
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.0
+orchestrator:
+  type: local
+  # Trials must run one at a time. Each trial's judge-engine runs 8 go-judge
+  # workers (JUDGE_WORKERS/GJ_PARALLELISM in the environment compose file), so
+  # concurrent trials contend for the grader: a concurrency-3 sweep crashed the
+  # judge on 20 of 188 problems, all special-judge or interactive, and all 20
+  # scored cleanly when re-graded at concurrency 1.
+  n_concurrent_trials: 1
+  quiet: false
+environment:
+  type: docker
+  force_build: true
+  delete: true
+  # No env passthrough is needed here. Task bundles carry their own judge build
+  # context and test data, so FRONTIER_CS_ALGORITHMIC_PATH is obsolete. Model
+  # credentials belong on the agent, not the environment: pass the key through
+  # the harbor process environment so it never lands on a command line, and set
+  # the provider base URL with `--agent-env OPENAI_BASE_URL=...` to route through
+  # a gateway or proxy. That is what the reference sweeps did.
+agents:
+  - name: oracle
+  # - name: claude-code
+  #   model_name: anthropic/claude-opus-4-6
+datasets:
+  - path: datasets/frontier-cs-algorithm

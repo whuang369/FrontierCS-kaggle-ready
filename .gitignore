@@ -1,0 +1,91 @@
+build
+dist
+*.egg-info
+**/__pycache__/
+*.log
+**/*.lic
+.vscode
+.idea
+.env
+.editorconfig
+.DS_Store
+**/*.pyc
+gen.py
+tag.txt
+algorithmic/data
+algorithmic/submissions
+algorithmic/scripts/solutions
+uv.lock
+problems-to-support-unbounded-score.txt
+LEADERBOARD.md
+
+################## Berkley Function Call Leaderboard ##########################
+
+# Ignore inference results
+berkeley-function-call-leaderboard/result/
+
+# Ignore leaderboard score
+berkeley-function-call-leaderboard/score/
+
+# Ignore environment variables
+berkeley-function-call-leaderboard/.env
+!berkeley-function-call-leaderboard/bfcl_eval/.env.example
+
+# Ignore config file for generating test cases
+berkeley-function-call-leaderboard/test_case_ids_to_generate.json
+!berkeley-function-call-leaderboard/bfcl_eval/test_case_ids_to_generate.json.example
+
+# Ignore multi turn ground truth conversation log
+berkeley-function-call-leaderboard/bfcl_eval/scripts/ground_truth_conversation/
+
+# Ignore lock files
+berkeley-function-call-leaderboard/**/*.lock
+
+.direnv/
+.venv
+
+# Ignore the wandb cache:
+**/wandb/
+
+# Generated evaluation results
+results/
+generation_logs/
+.frontier-cs/
+*.swp
+
+# kaggle-ready: everything below stays on disk but is untracked, so it never
+# syncs into the Kaggle dataset. The first launch ships the algorithmic track only.
+
+# Deferred tracks and their tooling (bboplace + the 2.0 integration plan are 2.0-only)
+research/
+2.0/
+adapters/frontier-cs-2.0/
+tools/
+docs/
+
+# Reference/model solutions, and the script that generates them
+algorithmic/solutions/
+algorithmic/scripts/
+
+# Repo infrastructure not used at evaluation time
+.github/
+leaderboard/
+tests/
+.pre-commit-config.yaml
+Makefile
+algorithmic/sky-judge.yaml
+
+# Assets and scripts: ship only what README.md actually links to, so the
+# benchmark's front page renders and its usage examples work on Kaggle.
+assets/*
+!assets/logo.png
+!assets/teaser.png
+scripts/*
+!scripts/run_eval.sh
+!scripts/viz.py
+
+*.lock
+
+# The adapter's lockfile ships: Kaggle re-runs this benchmark against new models
+# over time, so task-generation dependencies must resolve identically each time.
+!adapters/frontier-cs-algorithm/uv.lock

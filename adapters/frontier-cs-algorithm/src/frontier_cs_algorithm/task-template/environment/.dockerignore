@@ -1,0 +1,7 @@
+# Build context for the agent (main) image. The judge's inputs live in this
+# directory so the task bundle is self-contained, but the main image needs
+# neither: its Dockerfile only installs toolchains and never COPYs the context.
+# Without this, every main build ships the problem's test data to the daemon --
+# 250 MB for the largest problem -- for nothing.
+problem/
+judge-build/
